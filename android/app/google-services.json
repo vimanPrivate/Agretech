@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "346915777564",
+    "project_id": "agretech-6d964",
+    "storage_bucket": "agretech-6d964.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346915777564:android:9cb350c7c713e4bad9c3d9",
+        "android_client_info": {
+          "package_name": "com.example.agretech_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqGKBKQZFZZEfVmpFxBXwQTrC_Zqa6YvM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
