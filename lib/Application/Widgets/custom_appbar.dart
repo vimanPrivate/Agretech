@@ -22,13 +22,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
         ],
       ),
       centerTitle: true,
-      // flexibleSpace: Container(
-      //   decoration: BoxDecoration(
-      //     gradient: LinearGradient(
-      //       colors: [Color.fromRGBO(15, 93, 2,1),Color.fromRGBO(164, 179, 3,1)]
-      //     ),
-      //   ),
-      // ),
+
       flexibleSpace: Image(
         image: AssetImage(backgroundImage == ""? defaultBackgroundImage:backgroundImage),
         fit: BoxFit.cover,

@@ -1,6 +1,8 @@
-import 'package:agretech_app/Widgets/home_main_button.dart';
-import 'package:agretech_app/Widgets/main_button_widget.dart';
-import 'package:agretech_app/Widgets/notification_widget.dart';
+import 'package:agretech_app/Application/Pages/signup_page.dart';
+import 'package:agretech_app/Application/Widgets/circle_widget.dart';
+import 'package:agretech_app/Application/Widgets/home_main_button.dart';
+import 'package:agretech_app/Application/Widgets/main_button_widget.dart';
+import 'package:agretech_app/Application/Widgets/notification_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -65,15 +67,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   body: Center(
-    //     child: Container(
-    //       child: ElevatedButton(
-    //          onPressed: () => Test(),
-    //           child: Text("Click Me")),
-    //     ),
-    //   ),
-    // );
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -135,14 +128,34 @@ class _HomePageState extends State<HomePage> {
                             style: TextStyle(
                                 fontFamily: 'AlbertSans',
                                 fontSize: 18,
-
                             ),
                           ),
                         ),
-                        MainButtonWidget(title: 'Signup',onPressed: (){},width: 120,)
+                        MainButtonWidget(title: 'Signup',onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (builder) => SignupPage()));
+                        },width: 120,)
                       ],
                     ),
-
+                  ],
+                ),
+              ),
+              SizedBox(height: 50,),
+              Container(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        CircleBox(title: 'Green', subTitle: 'Sub Green', assetImage: "Assets/Images/brocoli.png"),
+                        CircleBox(title: 'Green', subTitle: 'Sub Green', assetImage: "Assets/Images/tractor.png"),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        CircleBox(title: 'Green', subTitle: 'Sub Green', assetImage: "Assets/Images/pinaple.png"),
+                        CircleBox(title: 'Green', subTitle: 'Sub Green', assetImage: "Assets/Images/knife.png"),
+                      ],
+                    ),
+                    //NotificationWidget()
                   ],
                 ),
               )

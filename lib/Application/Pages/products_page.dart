@@ -1,11 +1,13 @@
-//import 'dart:html';
-
 import 'dart:convert';
 import 'dart:ffi';
 
-import 'package:agretech_app/Pages/Item_insert_page.dart';
-import 'package:agretech_app/Widgets/custom_appbar.dart';
-import 'package:agretech_app/Widgets/product_container.dart';
+import 'package:agretech_app/Application/Pages/Item_insert_page.dart';
+import 'package:agretech_app/Business/Models/ProductModel.dart';
+import 'package:agretech_app/Business/ProductsService.dart';
+import 'package:agretech_app/Data/OfflineDataLayer.dart';
+import 'package:agretech_app/Data/Repository/Repository.dart';
+import 'package:agretech_app/Application/Widgets/custom_appbar.dart';
+import 'package:agretech_app/Application/Widgets/product_container.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,18 +24,25 @@ class ProductsPage extends StatefulWidget {
 
 class _ProductsPageState extends State<ProductsPage> {
   List<dynamic> productList = [];
-  final _localCache = Hive.box('localCache');
 
   Future fetchProducts() async {
-    await FirebaseFirestore.instance.collection("Products").get().then(
-            (snapshot) => snapshot.docs.forEach(
-                (document) {
-              setState(() {
-                productList.add(document);
-              });
-              //print(productList);
-            })
-    );
+    var repository = new Repository();
+    var result = await repository.ReadData('Products');
+    var offlineStorage = new OfflineDataLayer();
+
+    if(result.isEmpty){
+      productList.add(offlineStorage.getStoredValues());
+    }else{
+      result.forEach((element) {
+        setState(() {
+          productList.add(element);
+        });
+      });
+    }
+
+    var offline = new OfflineDataLayer();
+    offline.storeProductsValues(productList);
+
   }
 
   void editProduct(e) {
@@ -47,10 +56,8 @@ class _ProductsPageState extends State<ProductsPage> {
       fetchProducts();
     });
 
-    _localCache.put(1, "{name:'Viman',age:28}");
-    _localCache.put(2, "bla ba bla");
 
-    print(_localCache.get(1));
+    //offline.getStoredValues();
   }
 
   @override
@@ -71,7 +78,14 @@ class _ProductsPageState extends State<ProductsPage> {
                 function: () => editProduct(productList[index].reference.id),
             );
           },
-        )
+        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (builder) => ItemInsertPage(itemId: "",)));
+        },
+        backgroundColor: Colors.green,
+        child: Icon(Icons.add),
+      ),
     );
   }
 }

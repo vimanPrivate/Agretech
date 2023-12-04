@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../Utils/globals.dart' as globals;
 
 class ProductContainer extends StatelessWidget {
   final String productName;
@@ -9,14 +10,22 @@ class ProductContainer extends StatelessWidget {
   final dynamic function;
 
   const ProductContainer(
+
       {required this.productName,
       required this.unit,
       required this.price,
       required this.owner,
-      required this.function});
+      required this.function}
+
+      );
+
 
   @override
   Widget build(BuildContext context) {
+    bool allowEdit = false;
+    if(owner == globals.userId){
+      allowEdit = true;
+    }
     return Padding(
         padding: EdgeInsets.all(10),
         child: GestureDetector(
@@ -119,12 +128,15 @@ class ProductContainer extends StatelessWidget {
                             height: 40,
                             //width: 18.0,
                             margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                            child: IconButton(
-                              onPressed: function,
-                              icon: Icon(
-                                Icons.edit,
-                                size: 30,
-                                color: Colors.green,
+                            child: Visibility(
+                              visible: allowEdit,
+                              child: IconButton(
+                                onPressed: function,
+                                icon: Icon(
+                                  Icons.edit,
+                                  size: 30,
+                                  color: Colors.green,
+                                ),
                               ),
                             ),
                           )

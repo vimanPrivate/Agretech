@@ -5,11 +5,13 @@ class TextboxWidget extends StatelessWidget {
   TextEditingController controller;
   String hint ;
   Icon icon ;
-  TextboxWidget({required this.controller,required this.hint,required this.icon});
+  bool isPassword ;
+  TextboxWidget({required this.controller,required this.hint,required this.isPassword,required this.icon});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText:isPassword,
       controller: controller,
       decoration: InputDecoration(
           hintText: hint,

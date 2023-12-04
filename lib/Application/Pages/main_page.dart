@@ -1,7 +1,7 @@
-import 'package:agretech_app/Pages/account_page.dart';
-import 'package:agretech_app/Pages/home_page.dart';
-import 'package:agretech_app/Pages/products_page.dart';
-import 'package:agretech_app/Pages/stats_page.dart';
+import 'package:agretech_app/Application/Pages/account_page.dart';
+import 'package:agretech_app/Application/Pages/home_page.dart';
+import 'package:agretech_app/Application/Pages/products_page.dart';
+import 'package:agretech_app/Application/Pages/stats_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -52,23 +52,3 @@ class _MainPageState extends State<MainPage> {
   }
 }
 
-
-// class MainPage extends StatelessWidget {
-//   const MainPage({super.key});
-//
-//
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       bottomNavigationBar: BottomNavigationBar(
-//         items: [
-//           BottomNavigationBarItem(icon: Icon(Icons.apps)),
-//           BottomNavigationBarItem(icon: Icon(Icons.bar_chart_sharp)),
-//           BottomNavigationBarItem(icon: Icon(Icons.search)),
-//           BottomNavigationBarItem(icon: Icon(Icons.person))
-//         ],
-//       ),
-//     );
-//   }
-// }

@@ -1,10 +1,12 @@
-import 'package:agretech_app/Pages/Item_insert_page.dart';
-import 'package:agretech_app/Pages/account_page.dart';
-import 'package:agretech_app/Pages/login_page.dart';
-import 'package:agretech_app/Pages/main_page.dart';
-import 'package:agretech_app/Pages/products_page.dart';
-import 'package:agretech_app/Pages/signup_page.dart';
-import 'package:agretech_app/Widgets/product_container.dart';
+import 'package:agretech_app/Application/Pages/Item_insert_page.dart';
+import 'package:agretech_app/Application/Pages/account_page.dart';
+import 'package:agretech_app/Application/Pages/login_page.dart';
+import 'package:agretech_app/Application/Pages/main_page.dart';
+import 'package:agretech_app/Application/Pages/products_page.dart';
+import 'package:agretech_app/Application/Pages/signup_page.dart';
+import 'package:agretech_app/Data/OfflineDataLayer.dart';
+import 'package:agretech_app/Data/Repository/Repository.dart';
+import 'package:agretech_app/Application/Widgets/product_container.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,13 +19,8 @@ import 'package:hive_flutter/adapters.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-      name: 'xxxx',
-      options: FirebaseOptions(
-          apiKey: "AIzaSyC4qD5FUGmfgTbxHd5OA4HGvuWc5lhwEjw",
-          appId: "1:346915777564:web:c390e2ba624aba91d9c3d9",
-          messagingSenderId: "346915777564",
-          projectId: "agretech-6d964"));
+  Repository.initDbConnection();
+  OfflineDataLayer.initOffilineStorage();
 
   HttpOverrides.global = MyHttpOverrides();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -31,8 +28,9 @@ Future<void> main() async {
       statusBarColor: Color.fromRGBO(10, 10, 10, 0),
       statusBarIconBrightness: Brightness.dark));
 
-  await Hive.initFlutter();
-  var box = await Hive.openBox('localCache');
+
+  // await Hive.initFlutter();
+  // await Hive.openBox('localCache');
 
   runApp(MaterialApp(
     home: MainPage(),
